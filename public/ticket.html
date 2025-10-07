@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>整理券詳細</title>
+  <link rel="stylesheet" href="css/ticket.css" />
+</head>
+<body>
+  <div class="ticket-container">
+    <div class="label">整理番号</div>
+    <div class="ticket-number" id="ticket-number">--</div>
+    <div class="notice" id="notice">
+      <!-- 注意書き -->
+      <p>※この整理券は17:15まで有効です。15分以内にお越しください。</p>
+    </div>
+    <div id="error-message" style="color: red; text-align:center; margin-top: 20px;"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const ticketNumber = params.get('ticketNumber');
+    const name = params.get('name');
+
+    const ticketNumberElem = document.getElementById('ticket-number');
+    const errorMessageElem = document.getElementById('error-message');
+
+    if (!ticketNumber || !name) {
+      errorMessageElem.textContent = '整理券番号と名前が必要です。';
+      ticketNumberElem.style.display = 'none';
+      document.querySelector('.label').style.display = 'none';
+      document.querySelector('.notice').style.display = 'none';
+    } else {
+      fetch(`/ticket?ticketNumber=${ticketNumber}&name=${encodeURIComponent(name)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            errorMessageElem.textContent = data.error;
+            ticketNumberElem.style.display = 'none';
+            document.querySelector('.label').style.display = 'none';
+            document.querySelector('.notice').style.display = 'none';
+          } else {
+            ticketNumberElem.textContent = data.ticketNumber.toString().padStart(2, '0');
+          }
+        })
+        .catch(() => {
+          errorMessageElem.textContent = '整理券情報の取得に失敗しました。';
+          ticketNumberElem.style.display = 'none';
+          document.querySelector('.label').style.display = 'none';
+          document.querySelector('.notice').style.display = 'none';
+        });
+    }
+  </script>
+</body>
+</html>

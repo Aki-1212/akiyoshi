@@ -1,0 +1,10 @@
+[
+  {
+    "ticketNumber": 1,
+    "name": "aa",
+    "adults": 1,
+    "children": 2,
+    "seatPreference": "テーブル",
+    "expiryTime": "2025/10/8 17:15:00"
+  }
+]

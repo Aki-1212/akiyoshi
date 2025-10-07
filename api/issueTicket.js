@@ -1,18 +1,17 @@
 let tickets = global.tickets || [];
-global.tickets = tickets;
 let ticketCounter = global.ticketCounter || 1;
-global.ticketCounter = ticketCounter;
+const maxTickets = 3;
 
 export default function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const { name, adults, children, seatPreference } = req.body;
   if (!name || adults == null || children == null || !seatPreference) {
-    return res.status(400).json({ error: '全項目が必須です' });
+    return res.status(400).json({ error: '全項目が必須です。' });
   }
 
-  if (tickets.length >= 3) {
-    return res.status(400).json({ error: '整理券の上限に達しています' });
+  if (tickets.length >= maxTickets) {
+    return res.status(400).json({ error: '整理券の上限に達しています。' });
   }
 
   const ticket = {
@@ -21,10 +20,14 @@ export default function handler(req, res) {
     adults,
     children,
     seatPreference,
-    expiryTime: new Date(Date.now() + 1000 * 60 * 60).toISOString()
+    expiryTime: new Date(Date.now() + 60 * 60 * 1000).toISOString(), // 1時間後
   };
 
   tickets.push(ticket);
+
+  // Save back to global
+  global.tickets = tickets;
   global.ticketCounter = ticketCounter;
-  return res.status(200).json(ticket);
+
+  res.status(200).json(ticket);
 }

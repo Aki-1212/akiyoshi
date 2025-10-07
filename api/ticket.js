@@ -9,7 +9,7 @@ export default function handler(req, res) {
   );
 
   if (!ticket) {
-    return res.status(404).json({ error: '該当する整理券がありません' });
+    return res.status(404).json({ error: '該当する整理券が見つかりません。' });
   }
 
   res.status(200).json(ticket);

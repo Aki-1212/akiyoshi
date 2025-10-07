@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/qrform/:token",
+      "destination": "/main.html"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.ticket-container {
+  background-color: #fff;
+  border: 3px solid #2c3e50;
+  border-radius: 12px;
+  padding: 40px 60px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(44, 62, 80, 0.2);
+  max-width: 320px;
+  width: 100%;
+}
+
+/* 「整理番号」ラベル */
+.label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  letter-spacing: 0.1em;
+}
+
+/* 整理番号（数字部分） */
+.ticket-number {
+  font-size: 6rem;
+  font-weight: 900;
+  color: #e74c3c;
+  margin: 0 0 20px;
+  letter-spacing: 0.2em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* 注意書き */
+.notice {
+  font-size: 1rem;
+  color: #555;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  margin-top: 20px;
+  line-height: 1.4;
+}
+
+/* ==== スマホ対応（幅が600px以下の端末向け） ==== */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+    margin: 0 10px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  input,
+  button {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .radio-option {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  #ticket-number {
+    font-size: 2.5em;
+  }
+
+  #ticket-expiry {
+    font-size: 1.2em;
+  }
+
+  label {
+    font-size: 0.95em;
+  }
+}

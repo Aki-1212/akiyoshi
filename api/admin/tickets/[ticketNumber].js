@@ -4,13 +4,13 @@ export default function handler(req, res) {
   const { ticketNumber } = req.query;
   let tickets = global.tickets || [];
 
-  const before = tickets.length;
+  const beforeCount = tickets.length;
   tickets = tickets.filter(t => t.ticketNumber != ticketNumber);
   global.tickets = tickets;
 
-  if (tickets.length === before) {
-    return res.status(404).json({ error: '整理券が見つかりません' });
+  if (tickets.length === beforeCount) {
+    return res.status(404).json({ error: '該当する整理券が見つかりません。' });
   }
 
-  res.status(200).json({ message: '削除しました' });
+  res.status(200).json({ message: '整理券を削除しました。' });
 }
